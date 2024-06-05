@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv/config";
+import "dotenv/config";
 
 // Load environment variables from .env file
-dotenv.config();
 const connString = process.env.DB_CONNECTION_STRING;
 
 // Check if the connection string is missing
@@ -12,7 +11,7 @@ if (!connString) {
 
 const db = async () => {
     try {
-        await mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(connString);
         console.log("Connected to Database!!!....");
     } catch (error) {
         console.error("Couldn't connect to Database:", error);
