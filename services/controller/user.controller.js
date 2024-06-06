@@ -1,13 +1,10 @@
 import UserModel from "../models/user.model.js";
+import bcrypt from 'bcrypt';
 
 const home = async (req, res) => {
     try {
         const data = await UserModel.find();
-        if (!data) {
-            res.status(404).send("Did not get the Data");
-            return;
-        }
-        res.status(200).send(data);
+        // res.status(200).send(data);
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).send('Something went wrong');
@@ -28,7 +25,10 @@ const createUser = async (req, res) => {
     }
 
     try {
-        const newUser = new UserModel({ name, email, password, mobile });
+        const salt = await bcrypt.genSalt(10); // Correctly await bcrypt.genSalt
+        const hashPassword = await bcrypt.hash(password, salt); // Correctly await bcrypt.hash
+
+        const newUser = new UserModel({ name, email, password: hashPassword, mobile }); // Save the hashed password
         const userData = await newUser.save();
 
         res.status(201).send("User data successfully saved");

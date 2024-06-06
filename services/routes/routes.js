@@ -3,7 +3,8 @@ import {home, createUser} from '../controller/user.controller.js'
 
 const router = express.Router()
 
-router.get('/data', home)
-router.post('/createuser', createUser)
+// 
+router.get('/users', home)
+router.post('/adduser', createUser)
 
 export default router

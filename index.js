@@ -6,6 +6,7 @@ import router from "./services/routes/routes.js";
 import express from "express";
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
+import ejs from 'ejs'
 import "dotenv";
 
 // Variables
@@ -16,12 +17,15 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(morgan('tiny'))
+app.set('view enginer', 'ejs')
 
 
 // basic routes
 app.get('/', (req, res)=>{
     res.send("Hello, This is Bhaanoo Vishwakarma")
 })
+
+app.use('/api/v1/users', users)
 
 // managing routes
 app.use('/api/v1', router)
