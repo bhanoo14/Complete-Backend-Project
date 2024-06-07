@@ -24,6 +24,9 @@ app.set('view enginer', 'ejs')
 app.get('/', (req, res)=>{
     res.send("Hello, This is Bhaanoo Vishwakarma")
 })
+app.get('/api/v1/userupdate', (req, res)=>{
+    res.send("Hello, This is Bhaanoo Vishwakarma")
+})
 
 app.use('/api/v1/users', users)
 
